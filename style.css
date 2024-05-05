@@ -1,21 +1,49 @@
 body {
+  width: 100%;
   height: 100vh;
   background-color: #101211;
 }
-
+.game {
+  width: 100%;
+  display: flex;
+  margin-bottom: 10px;
+  flex-direction: column;
+  align-items: baseline;
+}
+.gameHeader {
+  width: 100%;
+  margin-top: 10px;
+  padding-left: 10px;
+  gap: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.titre {
+  margin-top: 10px;
+  margin-left: 20px;
+  font-size: 2em;
+  width: 100%;
+  height: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
 h1 {
-  text-align: center;
+  margin-left: 140px;
+  font-size: 25px;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   color: #eceeed;
   font-weight: bolder;
 }
-
 #counter {
-  font-size: 2em; /* Make the text larger */
-  color: #ff6347; /* Change the text color to tomato */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a shadow to the text */
-  margin: 20px 0; /* Add some margin around the counter */
-  animation: pulse 1s infinite; /* Add a pulsing animation */
+  top: 20px;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #eceeed;
+  gap: 10px;
 }
 
 /* Define the pulse animation */
@@ -32,7 +60,11 @@ h1 {
 }
 
 .WordleContainer {
+  margin-top: 40px;
+  gap: 10px;
+  height: 100%;
   display: flex;
+  align-items: center;
   flex-direction: column;
 }
 
@@ -55,17 +87,19 @@ h1 {
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  margin: 5px auto 5px auto;
+  margin: 0px auto 5px auto;
   gap: 5px;
 }
 
 .stockLetters {
-  height: 60px;
-  width: 60px;
+  height: 50px;
+  width: 50px;
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  border-radius: 5px;
   font-size: 20px;
   color: #eceeed;
   border: solid 2px #717d79;
+  backdrop-filter: blur(5px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -73,15 +107,14 @@ h1 {
 }
 
 .keyboardensemble {
-  top: 100px;
+  padding-top: 80px;
   width: 100%;
   max-width: 500px;
   height: 20%;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: space-around;
-  margin: 0 auto 10px auto;
+  margin: 0 auto 5px auto;
 }
 
 .container1,
@@ -91,7 +124,7 @@ h1 {
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  margin: 5px auto 5px auto;
+  margin: 3px auto 3px auto;
   gap: 5px;
 }
 
@@ -105,8 +138,8 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #717d79;
-  backdrop-filter: blur(30px);
+  background: #101211;
+  backdrop-filter: blur(10px);
   font-weight: bold;
   cursor: pointer;
 }
@@ -123,28 +156,25 @@ h1 {
   font-size: 10px;
 }
 .correct {
+  box-shadow: 0 0 20px #30a46c;
+
   border: solid 2px #30a46c;
 }
 
 .incorrect,
 .keyboard-incorrect {
+  box-shadow: 0 0 20px #e5484ded;
+
   border: solid 2px #e5484ded;
 }
 
-.keyboard-incorrect {
-  /* Bordure initialement transparente */
-  border-radius: 5px; /* Bordure arrondie */
-  padding: 10px;
-  border: 1px solid transparent; /* Bordure transparente */
-  box-shadow: 0 0 10px #e5484ded, 0 0 20px #e5484ded, 0 0 30px #e5484ded,
-    0 0 40px #e5484ded, 0 0 70px #e5484ded; /* Ombre de la bordure pour l'effet néon */
-}
-
 .misplaced {
+  box-shadow: 0 0 20px #ffe629;
+
   border: solid 2px #ffe629;
 }
 
-.stockLetters.flipped {
+.stockLetters.flipping {
   animation: flip 0.5s linear forwards;
   animation-delay: calc(var(--i) * 0.5s); /* Rotation de 180 degrés */
 }
@@ -160,35 +190,101 @@ h1 {
     transform: rotatex(360deg);
   }
 }
+.containerTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.level {
+  width: 100%;
+  padding-left: 30px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.start {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.newGame {
+  height: 40px;
+  width: 150px;
+  color: #eceeed;
+}
 button {
   padding: 10px 20px; /* Ajoutez un espace intérieur au bouton */
   font-size: 16px; /* Taille de police */
-  background: #717d79; /* Couleur de fond */
+  background: #101211; /* Couleur de fond */
   color: #eceeed;
   border: solid 2px #717d79; /* Supprimez la bordure par défaut */
   border-radius: 5px; /* Ajoutez des coins arrondis */
   cursor: pointer; /* Curseur pointeur au survol */
   transition: background-color 0.3s ease; /* Animation de transition */
 }
+.difficulty {
+  height: 40px;
+  width: 130px;
+  border: none;
+  color: #eceeed;
+}
+.difficulty:hover {
+  border-radius: 50%;
+  border: none;
+  color: #101211;
+  color: #30a46c;
+}
+.icon {
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  background: #717d79;
+  border: none;
+  /* Couleur de fond au survol */
+}
+.icon:hover {
+  background: #30a46c;
+  box-shadow: 0 0 20px #30a46c;
+}
+.newGame:hover {
+  border: solid 2px #30a46c;
+  box-shadow: 0 0 20px #30a46c; /* Couleur de fond au survol */
+}
 
-button:hover {
-  border: solid 2px #e5484ded; /* Couleur de fond au survol */
+.arrow {
+  height: 20px;
+  width: 20px;
+  /* Couleur de fond au survol */
+}
+.arrow:hover {
+  box-shadow: 0 0 20px #e5484ded; /* Couleur de fond au survol */
 }
 
 button:focus {
   outline: none; /* Supprimez la bordure de focus */
 }
-.confetti {
+#fireworksContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: black; /* Couleur de fond pour le contraste */
+}
+.firework {
   position: absolute;
-  background-color: gold; /* Couleur de base */
-  animation: fall 3s ease-out; /* Animation de chute */
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  animation: explode 1s forwards;
 }
 
-@keyframes fall {
+@keyframes explode {
   0% {
-    transform: translate(0, -100vh) rotate(0deg); /* Départ en haut */
+    transform: scale(1);
+    opacity: 1;
   }
   100% {
-    transform: translate(200px, 100vh) rotate(360deg); /* Fin en bas avec rotation */
+    transform: scale(0);
+    opacity: 0;
   }
 }

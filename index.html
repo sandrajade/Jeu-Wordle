@@ -4,98 +4,111 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script src="script.js" defer></script>
     <title>Jeu Worldle</title>
   </head>
   <body>
-    <h1>Wordle</h1>
-    <div id="counter">0</div>
-    <div id="confettiContainer"></div>
-    <div class="WordleContainer">
-      <div class="lettreensemble">
-        <div class="groupe0">
-          <div class="stockLetters"></div>
-          <div class="stockLetters"></div>
-          <div class="stockLetters"></div>
-          <div class="stockLetters"></div>
-          <div class="stockLetters"></div>
+    <div class="game">    
+        <div class="titre">
+          <h1>Wordle</h1>
         </div>
-        <div class="groupe1">
-          <div class="stockLetters"></div>
-          <div class="stockLetters"></div>
-          <div class="stockLetters"></div>
-          <div class="stockLetters"></div>
-          <div class="stockLetters"></div>
+        <div class="gameHeader">
+         <div id="counter" onclick="count()">0</div>
+          <div class="level">
+           <button class="difficulty" onclick="easy()">Facile <img src="nail.png" alt="icon nail" class="icon"></button>
+          <button class="difficulty" onclick="medium()">Moyen <img src="turtle.png" alt="icon turtle" class="icon"></button>
+            <button class="difficulty" onclick="hard()">Difficile <img src="rabbit.png" alt="icon rabbit" class="icon"></button>
+          </div>
         </div>
-        <div class="groupe2">
-          <div class="stockLetters"></div>
-          <div class="stockLetters"></div>
-          <div class="stockLetters"></div>
-          <div class="stockLetters"></div>
-          <div class="stockLetters"></div>
-        </div>
-        <div class="groupe3">
-          <div class="stockLetters"></div>
-          <div class="stockLetters"></div>
-          <div class="stockLetters"></div>
-          <div class="stockLetters"></div>
-          <div class="stockLetters"></div>
-        </div>
-        <div class="groupe4">
-          <div class="stockLetters"></div>
-          <div class="stockLetters"></div>
-          <div class="stockLetters"></div>
-          <div class="stockLetters"></div>
-          <div class="stockLetters"></div>
-        </div>
-        <div class="groupe5">
-          <div class="stockLetters"></div>
-          <div class="stockLetters"></div>
-          <div class="stockLetters"></div>
-          <div class="stockLetters"></div>
-          <div class="stockLetters"></div>
-        </div>
-      </div>
-
-      <div class="keyboardensemble">
-        <div class="container1">
-          <div class="keyboard" onclick="selectLetter('Q')">Q</div>
-          <div class="keyboard" onclick="selectLetter('W')">W</div>
-          <div class="keyboard" onclick="selectLetter('E')">E</div>
-          <div class="keyboard" onclick="selectLetter('R')">R</div>
-          <div class="keyboard" onclick="selectLetter('T')">T</div>
-          <div class="keyboard" onclick="selectLetter('Y')">Y</div>
-          <div class="keyboard" onclick="selectLetter('U')">U</div>
-          <div class="keyboard" onclick="selectLetter('I')">I</div>
-          <div class="keyboard" onclick="selectLetter('O')">O</div>
-          <div class="keyboard" onclick="selectLetter('P')">P</div>
-        </div>
-        <div class="container2">
-          <div class="keyboard" onclick="selectLetter('A')">A</div>
-          <div class="keyboard" onclick="selectLetter('S')">S</div>
-          <div class="keyboard" onclick="selectLetter('D')">D</div>
-          <div class="keyboard" onclick="selectLetter('F')">F</div>
-          <div class="keyboard" onclick="selectLetter('G')">G</div>
-          <div class="keyboard" onclick="selectLetter('H')">H</div>
-          <div class="keyboard" onclick="selectLetter('J')">J</div>
-          <div class="keyboard" onclick="selectLetter('K')">K</div>
-          <div class="keyboard" onclick="selectLetter('L')">L</div>
-        </div>
-        <div class="container3">
-          <div class="keyboard enter" onclick="checkLetters()">ENTER</div>
-          <div class="keyboard" onclick="selectLetter('Z')">Z</div>
-          <div class="keyboard" onclick="selectLetter('X')">X</div>
-          <div class="keyboard" onclick="selectLetter('C')">C</div>
-          <div class="keyboard" onclick="selectLetter('V')">V</div>
-          <div class="keyboard" onclick="selectLetter('B')">B</div>
-          <div class="keyboard" onclick="selectLetter('N')">N</div>
-          <div class="keyboard" onclick="selectLetter('M')">M</div>
-          <div class="keyboard delete" onclick="deleteLetter()">
-            <img src="delete.svg" />
+       </div>  
+      </div>    
+        <div class="firework"></div>
+        <div class="WordleContainer">
+          <div class="lettreensemble">
+            <div class="groupe0">
+              <div class="stockLetters"></div>
+              <div class="stockLetters"></div>
+              <div class="stockLetters"></div>
+              <div class="stockLetters"></div>
+              <div class="stockLetters"></div>
+            </div>
+            <div class="groupe1">
+              <div class="stockLetters"></div>
+              <div class="stockLetters"></div>
+              <div class="stockLetters"></div>
+              <div class="stockLetters"></div>
+              <div class="stockLetters"></div>
+            </div>
+            <div class="groupe2">
+              <div class="stockLetters"></div>
+              <div class="stockLetters"></div>
+              <div class="stockLetters"></div>
+              <div class="stockLetters"></div>
+              <div class="stockLetters"></div>
+            </div>
+            <div class="groupe3">
+              <div class="stockLetters"></div>
+              <div class="stockLetters"></div>
+              <div class="stockLetters"></div>
+              <div class="stockLetters"></div>
+              <div class="stockLetters"></div>
+            </div>
+            <div class="groupe4">
+              <div class="stockLetters"></div>
+              <div class="stockLetters"></div>
+              <div class="stockLetters"></div>
+              <div class="stockLetters"></div>
+              <div class="stockLetters"></div>
+            </div>
+            <div class="groupe5">
+              <div class="stockLetters"></div>
+              <div class="stockLetters"></div>
+              <div class="stockLetters"></div>
+              <div class="stockLetters"></div>
+              <div class="stockLetters"></div>
+            </div>
+          </div>
+          <div class="keyboardensemble">
+            <div class="container1">
+              <div class="keyboard" onclick="selectLetter('Q')">Q</div>
+              <div class="keyboard" onclick="selectLetter('W')">W</div>
+              <div class="keyboard" onclick="selectLetter('E')">E</div>
+              <div class="keyboard" onclick="selectLetter('R')">R</div>
+              <div class="keyboard" onclick="selectLetter('T')">T</div>
+              <div class="keyboard" onclick="selectLetter('Y')">Y</div>
+              <div class="keyboard" onclick="selectLetter('U')">U</div>
+              <div class="keyboard" onclick="selectLetter('I')">I</div>
+              <div class="keyboard" onclick="selectLetter('O')">O</div>
+              <div class="keyboard" onclick="selectLetter('P')">P</div>
+            </div>
+            <div class="container2">
+              <div class="keyboard" onclick="selectLetter('A')">A</div>
+              <div class="keyboard" onclick="selectLetter('S')">S</div>
+              <div class="keyboard" onclick="selectLetter('D')">D</div>
+              <div class="keyboard" onclick="selectLetter('F')">F</div>
+              <div class="keyboard" onclick="selectLetter('G')">G</div>
+              <div class="keyboard" onclick="selectLetter('H')">H</div>
+              <div class="keyboard" onclick="selectLetter('J')">J</div>
+              <div class="keyboard" onclick="selectLetter('K')">K</div>
+              <div class="keyboard" onclick="selectLetter('L')">L</div>
+            </div>          
+            <div class="container3">
+              <div class="keyboard enter" onclick="checkLetters()">ENTER</div>
+              <div class="keyboard" onclick="selectLetter('Z')">Z</div>
+              <div class="keyboard" onclick="selectLetter('X')">X</div>
+              <div class="keyboard" onclick="selectLetter('C')">C</div>
+              <div class="keyboard" onclick="selectLetter('V')">V</div>
+              <div class="keyboard" onclick="selectLetter('B')">B</div>
+              <div class="keyboard" onclick="selectLetter('N')">N</div>
+              <div class="keyboard" onclick="selectLetter('M')">M</div>
+              <div class="keyboard delete" onclick="deleteLetter()">
+                <img src="delete.svg" class="arrow" /></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <button onclick="resetGame()">Nouvelle partie</button>
   </body>
 </html>
