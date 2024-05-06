@@ -30,7 +30,7 @@ const keyboard = [
 ];
 
 // Liste de mots à deviner
-const wordsEasy = [
+const wordseasy = [
   "table",
   "livre",
   "pomme",
@@ -82,7 +82,7 @@ const wordsEasy = [
   "voile",
   "bours",
 ];
-const wordsMedium = [
+const wordsmedium = [
   "rapide",
   "aigle",
   "tendre",
@@ -134,7 +134,7 @@ const wordsMedium = [
   "avant",
   "route",
 ];
-const wordsHard = [
+const wordshard = [
   "fiasco",
   "aiglon",
   "fondre",
@@ -227,14 +227,86 @@ let currentAttempt = 0; // Compteur de tentatives
 let results = []; // Tableau pour stocker les résultats de chaque tentative
 let isDeleteEnabled = true;
 let counter = 0; // Initialisation du compteur à zéro
+let selectedWord; // Mot sélectionné pour la partie en cours
 
+// Définition des boutons de difficulté
+const easyButtonElement = document.querySelector(".wordseasy");
+const mediumButtonElement = document.querySelector(".wordsmedium");
+const hardButtonElement = document.querySelector(".wordshard");
+
+// Utiliser easyButtonElement dans votre code
+if (easyButtonElement) {
+  easyButtonElement.addEventListener("click", () => {
+    // Gestionnaire d'événements onclick pour le bouton easy
+    startNewGame(NIVEAU_FACILE);
+  });
+}
+
+if (mediumButtonElement) {
+  mediumButtonElement.addEventListener("click", () => {
+    startNewGame(NIVEAU_INTERMEDIAIRE); // Démarrer un nouveau jeu avec la difficulté intermédiaire
+  });
+}
+
+if (hardButtonElement) {
+  hardButtonElement.addEventListener("click", () => {
+    startNewGame(NIVEAU_DIFFICILE); // Démarrer un nouveau jeu avec la difficulté difficile
+  });
+}
+
+// Fonction pour démarrer une nouvelle partie en fonction de la difficulté choisie
+function startNewGame(difficulty) {
+  let selectedWord;
+
+  // Sélectionner un mot aléatoire en fonction du niveau de difficulté
+  switch (difficulty) {
+    case NIVEAU_FACILE:
+      selectedWord = selectRandomWord(wordseasy);
+      console.log("Mot facile sélectionné :", selectedWord);
+      break;
+    case NIVEAU_INTERMEDIAIRE:
+      selectedWord = selectRandomWord(wordsmedium);
+      console.log("Mot intermédiaire sélectionné :", selectedWord);
+      break;
+    case NIVEAU_DIFFICILE:
+      selectedWord = selectRandomWord(wordshard);
+      console.log("Mot difficile sélectionné :", selectedWord);
+      break;
+    default:
+      console.error("Niveau de difficulté non reconnu :", difficulty);
+      return; // Arrêter l'exécution si le niveau de difficulté n'est pas valide
+  }
+
+  // Réinitialiser le jeu ou effectuer d'autres actions nécessaires après le choix de la difficulté
+  // displayNewWord(selectedWord);
+}
+
+startNewGame();
+// Fonction pour sélectionner un mot aléatoire dans un tableau de mots
+function selectRandomWord(wordsArray) {
+  // Vérifier si wordsArray est défini et est un tableau
+  if (!Array.isArray(wordsArray) || wordsArray.length === 0) {
+    console.error("Le tableau de mots est invalide ou vide");
+    return null; // ou une autre valeur de retour appropriée
+  }
+
+  return wordsArray[Math.floor(Math.random() * wordsArray.length)];
+}
+selectRandomWord();
+
+// Définition des fonctions easy(), medium() et hard() pour les actions spécifiques
+displayNewWord();
+// Attacher les événements une fois que le DOM est chargé
 function resetAttempts() {
   // Réinitialiser les variables de jeu
   attempts = [];
+  console.log("Tentatives réinitialisées.");
   currentAttempt = 0;
+  console.log("Compteur de tentatives réinitialisé.");
 
   // Réinitialiser l'affichage des lettres dans l'interface
   let stockLettersElements = document.querySelectorAll(".stockLetters");
+
   stockLettersElements.forEach((element) => {
     element.textContent = "_";
     element.classList.remove("correct", "misplaced", "incorrect");
@@ -257,55 +329,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// Définition de la fonction startNewGame avec gestion du niveau de difficulté
-function startNewGame(difficulty) {
-  let selectedWord;
-
-  // Sélectionner un mot aléatoire en fonction du niveau de difficulté
-  switch (difficulty) {
-    case "easy":
-      selectedWord = selectRandomWord(wordsEasy);
-      break;
-    case "medium":
-      selectedWord = selectRandomWord(wordsMedium);
-      break;
-    case "hard":
-      selectedWord = selectRandomWord(wordsHard);
-      break;
-    default:
-      console.error("Niveau de difficulté non reconnu :", difficulty);
-      return; // Arrêter l'exécution si le niveau de difficulté n'est pas valide
-  }
-  // Fonction pour démarrer le jeufunction startGame() {
-  // Réinitialiser et démarrer une nouvelle partie
-  resetAttempts();
-
-  // Sélectionnez un nouveau mot à deviner
-  const wordToGuess = selectRandomWord(); // Appeler la fonction avec les parenthèses pour obtenir le mot sélectionné
-  createAttempts();
-
-  // Réinitialiser le numéro de tentative
-  currentAttempt = 0; // Remettre le compteur de tentative à zéro au début du jeu
-
-  // Appeler la fonction pour démarrer une nouvelle tentative
-  playNewAttempt();
-  // Afficher le mot sélectionné dans l'interface
-  displayNewWord(selectedWord);
-
-  // Démarrer une nouvelle partie avec le mot sélectionné
-  console.log(`Nouvelle partie démarrée avec le mot : ${selectedWord}`);
-  // Ici, vous pouvez appeler d'autres fonctions ou démarrer d'autres actions de jeu
-}
-// Fonction pour réinitialiser l'état du jeu avec le nouveau mot à deviner
-function resetGame(selectedWord) {
-  // Ici, vous pouvez réinitialiser tous les états du jeu
-  console.log("Réinitialisation du jeu...");
-
-  // Exemple : Mettre à jour l'interface avec le nouveau mot à deviner
-  displayNewWord(selectedWord);
-
-  // Autres actions de réinitialisation ou de démarrage de la partie
-}
+// Définition de la fonction selectRandomWord
 
 // Fonction pour afficher le mot à deviner dans l'interface
 function displayNewWord(word) {
@@ -315,20 +339,9 @@ function displayNewWord(word) {
   }
 }
 
-// Fonction pour sélectionner un mot aléatoire parmi une liste prédéfinie
-function selectRandomWord(wordsArray) {
-  // Vérifier si wordsArray est défini et est un tableau
-  if (!Array.isArray(wordsArray) || wordsArray.length === 0) {
-    console.error("Le tableau de mots est invalide ou vide");
-    return null; // ou une autre valeur de retour appropriée
-  }
-
-  const randomIndex = Math.floor(Math.random() * wordsArray.length);
-  return wordsArray[randomIndex];
-}
-
 // Appeler la fonction pour sélectionner un mot aléatoire et le définir comme wordToGuess
 wordToGuess = selectRandomWord();
+
 const letterOccurrences = countLetterOccurrences(wordToGuess);
 
 // Vérifier si 'wordToGuess' est défini et est de type 'string'
@@ -699,6 +712,7 @@ function getRandomColor() {
   }
   return color;
 }
+
 // Fonction pour incrémenter le compteur et mettre à jour l'affichage
 function incrementCounter() {
   counter++; // Incrémente le compteur à chaque clic
@@ -709,7 +723,7 @@ function incrementCounter() {
 function updateCounterDisplay() {
   const counterElement = document.getElementById("counter"); // Sélectionne l'élément du compteur par son ID
   if (counterElement) {
-    counterElement.textContent = counter; // Met à jour le contenu de l'élément avec la valeur du compteur
+    counterElement.textContent = counter.toString(); // Met à jour le contenu de l'élément avec la valeur du compteur
   }
 }
 // Appeler la fonction createFireworks pour démarrer l'animation de feux d'artifice
@@ -731,12 +745,11 @@ document.addEventListener("keydown", (event) => {
     handleDeleteKeyPress();
   }
 });
-
-const easyButton = document.getElementById("easyButton"); // Replace 'easyButton' with the actual id of your button
-
+// Écouteur d'événement pour le bouton "Facile"
+const easyButton = document.querySelector(".easy");
 if (easyButton) {
   easyButton.addEventListener("click", () => {
-    const selectedWord = selectRandomWord(wordsEasy);
+    const selectedWord = selectRandomWord(easy); // Utiliser wordsEasy ici
     console.log("Mot facile sélectionné :", selectedWord);
     // Vous pouvez maintenant utiliser le mot sélectionné comme nécessaire
   });
@@ -745,11 +758,10 @@ if (easyButton) {
 }
 
 // Écouteur d'événement pour le bouton "Moyen"
-const mediumButton = document.querySelector(".difficulty.medium");
-
+const mediumButton = document.querySelector(".medium");
 if (mediumButton) {
   mediumButton.addEventListener("click", () => {
-    const selectedWord = selectRandomWord(wordsMedium);
+    const selectedWord = selectRandomWord(medium); // Utiliser wordsMedium ici
     console.log("Mot intermédiaire sélectionné :", selectedWord);
     // Vous pouvez maintenant utiliser le mot sélectionné comme nécessaire
   });
@@ -758,13 +770,20 @@ if (mediumButton) {
 }
 
 // Écouteur d'événement pour le bouton "Difficile"
-const hardButton = document.querySelector(".difficulty.hard");
+const hardButton = document.querySelector(".hard");
 if (hardButton) {
   hardButton.addEventListener("click", () => {
-    const selectedWord = selectRandomWord(wordsHard);
+    const selectedWord = selectRandomWord(hard); // Utiliser wordsHard ici
     console.log("Mot difficile sélectionné :", selectedWord);
     // Vous pouvez maintenant utiliser le mot sélectionné comme nécessaire
   });
 } else {
   console.error("hardButton is null");
+}
+// Fonction pour afficher le mot à deviner dans l'interface
+function displayNewWord(word) {
+  const wordDisplayElement = document.getElementById("wordToGuess");
+  if (wordDisplayElement) {
+    wordDisplayElement.textContent = word; // Mettre à jour l'élément HTML avec le nouveau mot
+  }
 }

@@ -6,7 +6,7 @@ body {
 .game {
   width: 100%;
   display: flex;
-  margin-bottom: 10px;
+  margin: 10px 20px 10px 20px;
   flex-direction: column;
   align-items: baseline;
 }
@@ -60,7 +60,7 @@ h1 {
 }
 
 .WordleContainer {
-  margin-top: 40px;
+  margin-top: 20px;
   gap: 10px;
   height: 100%;
   display: flex;
@@ -199,40 +199,27 @@ h1 {
   width: 100%;
   padding-left: 30px;
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-.start {
-  display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.newGame {
-  height: 40px;
-  width: 150px;
-  color: #eceeed;
-}
-button {
-  padding: 10px 20px; /* Ajoutez un espace intérieur au bouton */
+.wordseasy,
+.wordsmedium,
+.wordshard {
+  height: 50px;
+  width: 130px; /* Ajoutez un espace intérieur au bouton */
   font-size: 16px; /* Taille de police */
   background: #101211; /* Couleur de fond */
   color: #eceeed;
-  border: solid 2px #717d79; /* Supprimez la bordure par défaut */
   border-radius: 5px; /* Ajoutez des coins arrondis */
-  cursor: pointer; /* Curseur pointeur au survol */
-  transition: background-color 0.3s ease; /* Animation de transition */
+  cursor: pointer;
+  border: none; /* Curseur pointeur au survol */
+  /* Animation de transition */
 }
-.difficulty {
-  height: 40px;
-  width: 130px;
-  border: none;
-  color: #eceeed;
-}
-.difficulty:hover {
-  border-radius: 50%;
-  border: none;
-  color: #101211;
+
+.wordseasy:hover,
+.wordsmedium:hover,
+.wordshard:hover {
   color: #30a46c;
 }
 .icon {
@@ -261,9 +248,6 @@ button {
   box-shadow: 0 0 20px #e5484ded; /* Couleur de fond au survol */
 }
 
-button:focus {
-  outline: none; /* Supprimez la bordure de focus */
-}
 #fireworksContainer {
   position: relative;
   width: 100%;
